@@ -63,7 +63,7 @@ def P(t):
 	return (K*A*e**(r*t)) / (1 + A*e**(r*t))
 
 total_pop = sofar + B(2011, 5e5)
-print 'Number of people who wil ever live: %e' % total_pop
+print 'Number of people who wil ever live: %f' % total_pop
 print '(Assuming humanity dies off by 500,000 AD)'
 print
 
@@ -72,6 +72,7 @@ woman_subtotal = 287047314 + 295555732 + 271093454 + 246580992 + 239042844 + 228
 print 'Of the %d people alive in 2016, %d were 20-60 y/o women' % (7323187457, woman_subtotal)
 
 woman_total = woman_subtotal + 152109594 + 118877093 + 85170799 + 67005265 + 44065869 + 24568704 + 9736777 + 2374033 + 407552
+print 'Of the women alive in 2016, %d were over 20' % woman_total
 female_ratio = Decimal(woman_total) / Decimal(7323187457)
 print 'Ratio of women who are 20+ to population: %f' % female_ratio 
 print 'Number of 20+ years old women who will ever live: %e' % (total_pop*female_ratio)
@@ -89,7 +90,7 @@ print
 f_max = G*male_mass*luna_mass / (com_height**2)
 f_min = G*male_mass*luna_mass / ((com_height+2*earth_radius)**2)
 f_2016 = G*male_mass*female_mass*woman_subtotal / earth_radius**2
-f_women = G*male_mass*female_mass*woman_total / earth_radius**2
+f_women = G*male_mass*female_mass*float(total_pop*female_ratio) / earth_radius**2
 f_world = G*male_mass*(female_mass*float(total_pop*female_ratio) + male_mass*float(total_pop*male_ratio)) / earth_radius**2
 
 print
@@ -101,3 +102,6 @@ print '%-20s | %17.3e | %14.3e | %14.3e' % ('One Furman girl', f_woman, f_min/f_
 print '%-20s | %17.3e | %14.3e | %14.3e' % ('All 2016 women', f_2016, f_min/f_2016, f_max/f_2016)
 print '%-20s | %17.3e | %14.3e | %14.3e' % ('All women ever', f_women, f_min/f_women, f_max/f_women)
 print '%-20s | %17.3e | %14.3e | %14.3e' % ('All people ever', f_world, f_min/f_world, f_max/f_world)
+print
+rating = f_max / (5 * f_world / (float(total_pop*female_ratio) + male_mass*float(total_pop*male_ratio)))
+print 'If the average person is a 5, Luna is a %e' % rating
