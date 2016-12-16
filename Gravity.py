@@ -28,7 +28,7 @@ com_height = LUNAR_SCALE_FACTOR*female_com_ratio*female_height
 print 'Center of mass height: %e' % com_height
 
 com_distance = sqrt(earth_radius**2 + (earth_radius+com_height)**2 - 2*earth_radius*(earth_radius+com_height)*cos(central_angle))
-print 'Center of mass distnace %e' % com_distance
+print 'Center of mass distance %e' % com_distance
 
 force_gravity = (G*mass*male_mass) / (com_distance**2)
 print 'Force of gravity:', force_gravity

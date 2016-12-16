@@ -18,9 +18,9 @@ years_age_of_universe = 13.82e9
 
 #basic calculations
 density = female_mass/female_volume
-print 'Density:', density
+print 'Density (kg per m^3):', density
 mass = density*volume
-print 'Mass: %e' % mass
+print 'Mass (kg): %e' % mass
 sugar_content = grams_sugar_per_serving*servings_per_giant_bear/giant_bear_mass*mass
 print 'Sugar content (grams): %e' % sugar_content
 years_of_sugar = sugar_content/grams_annual_world_sugar_production
