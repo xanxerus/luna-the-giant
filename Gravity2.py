@@ -68,9 +68,11 @@ print '(Assuming humanity dies off by 500,000 AD)'
 print
 
 #https://www.census.gov/population/international/data/idb/region.php?N=%20Results%20&T=10&A=aggregate&RT=0&Y=2016&R=1&C=
-female_ratio = Decimal(sum((287047314, 295555732, 271093454, 246580992, 239042844, 228387092, 
-				  207351391, 170558952, 152109594, 118877093, 85170799, 67005265, 
-				  44065869, 24568704, 9736777, 2374033, 407552))) / Decimal(7323187457)
+woman_subtotal = 287047314 + 295555732 + 271093454 + 246580992 + 239042844 + 228387092 + 207351391 + 170558952
+print 'Of the %d people alive in 2016, %d were 20-60 y/o women' % (7323187457, woman_subtotal)
+
+woman_total = woman_subtotal + 152109594 + 118877093 + 85170799 + 67005265 + 44065869 + 24568704 + 9736777 + 2374033 + 407552
+female_ratio = Decimal(woman_total) / Decimal(7323187457)
 print 'Ratio of women who are 20+ to population: %f' % female_ratio 
 print 'Number of 20+ years old women who will ever live: %e' % (total_pop*female_ratio)
 print
@@ -86,16 +88,16 @@ print
 
 f_max = G*male_mass*luna_mass / (com_height**2)
 f_min = G*male_mass*luna_mass / ((com_height+2*earth_radius)**2)
-f_women = G*male_mass*female_mass*float(total_pop*female_ratio) / earth_radius**2
+f_2016 = G*male_mass*female_mass*woman_subtotal / earth_radius**2
+f_women = G*male_mass*female_mass*woman_total / earth_radius**2
 f_world = G*male_mass*(female_mass*float(total_pop*female_ratio) + male_mass*float(total_pop*male_ratio)) / earth_radius**2
 
 print
-print '%-20s | %17s | %12s | %12s' % ('Object', 'Gravity Force (N)', 'Ratio to min', 'Ratio to max')
-print '-'*71
-print '%-20s | %17.3f | %12.3f | %12.3f' % ('Luna\'s Maximum Force', f_max, f_max/f_min, f_max/f_max)
-print '%-20s | %17.3f | %12.3f | %12.3f' % ('Luna\'s Minimum Force', f_min, f_min/f_min, f_min/f_max)
-print '%-20s | %17.3e | %12.3e | %12.3e' % ('One Furman girl', f_woman, f_woman/f_min, f_woman/f_max)
-print '%-20s | %17.3e | %12.3e | %12.3e' % ('All women ever', f_women, f_women/f_min, f_women/f_max)
-print '%-20s | %17.3e | %12.3e | %12.3e' % ('All people ever', f_world, f_world/f_min, f_world/f_max)
-
-print f_max/f_world
+print '%-20s | %17s | %14s | %14s' % ('Object', 'Gravity Force (N)', 'Min Comparison', 'Max Comparison')
+print '-'*75
+print '%-20s | %17.3f | %14.3f | %14.3f' % ('Luna\'s Maximum Force', f_max, f_min/f_max, f_max/f_max)
+print '%-20s | %17.3f | %14.3f | %14.3f' % ('Luna\'s Minimum Force', f_min, f_min/f_min, f_max/f_min)
+print '%-20s | %17.3e | %14.3e | %14.3e' % ('One Furman girl', f_woman, f_min/f_woman, f_max/f_woman)
+print '%-20s | %17.3e | %14.3e | %14.3e' % ('All 2016 women', f_2016, f_min/f_2016, f_max/f_2016)
+print '%-20s | %17.3e | %14.3e | %14.3e' % ('All women ever', f_women, f_min/f_women, f_max/f_women)
+print '%-20s | %17.3e | %14.3e | %14.3e' % ('All people ever', f_world, f_min/f_world, f_max/f_world)
