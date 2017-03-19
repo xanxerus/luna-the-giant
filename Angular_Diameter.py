@@ -1,7 +1,9 @@
 #!/usr/bin/pypy
-from math import sqrt, cos, atan
 
 '''Angular Diameter'''
+
+from math import sqrt, cos, atan
+
 
 #givens
 M_PER_KM = 1000.
